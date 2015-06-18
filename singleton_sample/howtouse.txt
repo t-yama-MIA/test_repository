@@ -1,0 +1,13 @@
+[使い方]
+    // 生成と再生
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"hoge" ofType:@"mp3"];
+    AVAudioPlayer *player = [HogeSingleton createPlayerWithURLString:path forKey:@"hoge"];
+    player.numberOfLoops = 0;
+    [player play];
+    
+    // 取得と一時停止
+    AVAudioPlayer *samePlayer = [HogeSingleton playerWithKey:@"hoge"];
+    [samePlayer pause];
+    
+    // 破棄と停止
+    [HogeSingleton deletePlayerWithKey:@"hoge"];
