@@ -1,0 +1,25 @@
+【音声ファイルリストの作成】
+
+1.ファイルの新規作成で「Property List」を新規作成する。（名前は適当にSDPreloadingAudioFiles.plistなど)
+
+
+2.作成したplistを編集する。
+サンプル(SDPreloadingAudioFiles.plist)を参考に作成してください。
+plistは階層構造になっており、全てKey,Type,Valueで構成されている。
+Key:NSDictionaryのkeyと同様に値とペアとなる名前のようなもの
+Type:Valueの型を表す。Array,Dictionary,Stringなど
+Value:値が入る。TypeがStringの場合は文字列が入る。TypeがArrayやDictionaryの場合はその下に別の階層を作ることができる。
+今回の場合は音声ファイルのリスト(=Array)なので、Root階層のTypeはArrayにするのが適切。
+TypeをArrayにした行要素の下の階層には複数の要素を追加してリストを作成出来る。これらの要素にはKeyは設定出来ない(NSArrayと同じ)。
+ArrayにはItem0,Item1,Item2…のように初回ロードする音声ファイルの数と同じ要素数を追加する。(10ファイルならItem9まで)
+ItemのTypeは全てDictionaryとする。これは一つの音声ファイルに「ファイル名」と「key名」を持たせたいからである。
+
+
+3.Plistをロードするためのクラスを作成する
+サンプル(PlistLoadSampleクラス)を参考に作成してください。
+ポイントはplistのロード部分(arrayWithContentsOfFile:)のメソッドです。
+今回作成したplistのRootのTypeがArrayのためNSArrayで取得できます。
+NSDictionaryにも似たようなメソッドがあるので確認しておいてください。
+
+
+4.AppDelegateなどに実装する。
